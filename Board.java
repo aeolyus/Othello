@@ -3,5 +3,5 @@ public abstract class Board{
     public Board(int i){
         board=new int[i][i];
     }
-    public 
+    public abstract void place(int x, int y, int player);
 }
