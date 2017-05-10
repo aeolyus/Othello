@@ -1,14 +1,15 @@
 public abstract class Board{
-    private int score1,score2;
+    protected int score1,score2;
     int[][] board;
     public Board(int i){
         board=new int[i][i];
     }
     public abstract void place(int x, int y, int player);
     public boolean full(){
-        for(int i:board)
-            if(i==0)
-                return false;
+        for(int i[]:board)
+            for(int j:i)
+                if(j==0)
+                    return false;
         return true;
     }
      public int getScore1(){
@@ -19,7 +20,8 @@ public abstract class Board{
         calculateScore2();
         return score2;
     }
-    public abstract calculateScore1();
-    public abstract calculateScore2();
-    public abstract printBoard();
+    public abstract void calculateScore1();
+    public abstract void calculateScore2();
+    public abstract void printBoard();
+    public abstract boolean isLegal(int i, int j,int player);
 }
