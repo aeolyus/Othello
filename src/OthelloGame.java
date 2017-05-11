@@ -21,21 +21,21 @@ public class OthelloGame implements Game{
         int x,y;
         while(!gameOver()){
             board.printBoard();
-            do{
+            // do{
                 System.out.println("Player 1, Enter x-coord");
                 x = in.nextInt();
                 System.out.println("Player 1, Enter y-coord");
                 y = in.nextInt();
-            }while(board.isLegal(x, y, 1) != true);
-            board.place(x,y,1);
-            do{
+            // }while(board.isLegal(x, y, 1) != true);
+            board.place(y,x,1);
+            board.printBoard();
+            // do{
                 System.out.println("Player 2, Enter x-coord");
                 x = in.nextInt();
                 System.out.println("Player 2, Enter y-coord");
                 y = in.nextInt();
-            } while(board.isLegal(x, y, 2) != true);
-            board.place(x,y,2);
-            board.printBoard();
+            // } while(board.isLegal(x, y, 2) != true);
+            board.place(y,x,2);
         }
     }
 
@@ -49,6 +49,7 @@ public class OthelloGame implements Game{
                     if(board.isLegal(i,j,currentPlayer))
                         return false;
             int winner=board.getScore1()>board.getScore2()?1:2;
+            board.printBoard();
             System.out.println("Player "+winner+" wins!");
             return true;
         }

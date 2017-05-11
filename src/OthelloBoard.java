@@ -1,8 +1,8 @@
 public class OthelloBoard extends Board{
     public OthelloBoard(){
         super(8);//0- blank, 1- player 1, 2- player 2
-        board[3][3]=board[4][4]=1;
-        board[3][4]=board[4][3]=2;
+        board[3][3]=board[4][4]=2;
+        board[3][4]=board[4][3]=1;
     }
     
     public boolean isLegal(int i, int j, int player){
@@ -13,8 +13,8 @@ public class OthelloBoard extends Board{
         }else if (player == 2){
             otherPlayer = 1;
         }
-        
-        if (board[i][j] == player || board[i][j] == otherPlayer){
+        //checks if empty space
+        if (board[i][j]!=0){
             System.out.print("Error: That space is not empty");
             return canDo;
         }
@@ -104,6 +104,7 @@ public class OthelloBoard extends Board{
         int botRight = board[i+1][j+1];
         return canDo;
     }
+    
     /**
      * Places a piece on the board (coordinates start at (0,0))
      */
@@ -117,7 +118,7 @@ public class OthelloBoard extends Board{
     public void capture(int x,int y,int player){
         boolean flag=true; //true until first piece is found
         //horizontal right
-        for(int i=1;x+i<board[0].length&&flag;i++)
+        for(int i=1;x+i<board.length&&flag;i++)
             if(board[x+i][y]==player){
                 flag=false;
                 for(int j=x+i;j>x;j--)
@@ -213,7 +214,7 @@ public class OthelloBoard extends Board{
                 else if(board[i][j]==2)
                     System.out.print("O  ");
                 else
-                    System.out.print("~  ");
+                    System.out.print("*  ");
             }
             System.out.println();
         }
