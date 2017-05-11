@@ -43,6 +43,9 @@ public class OthelloGame implements Game{
                 board.place(y,x,2);
             }
         }
+        int winner=board.getScore1()>board.getScore2()?1:2;
+        board.printBoard();
+        System.out.println("Player "+winner+" wins!");
     }
 
     /**
@@ -54,9 +57,6 @@ public class OthelloGame implements Game{
                 for(int j=0;j<8;j++)
                     if(board.isLegal(i,j,currentPlayer))
                         return false;
-            int winner=board.getScore1()>board.getScore2()?1:2;
-            board.printBoard();
-            System.out.println("Player "+winner+" wins!");
             return true;
         }
         return false;
