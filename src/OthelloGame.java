@@ -20,22 +20,28 @@ public class OthelloGame implements Game{
         Scanner in = new Scanner(System.in);
         int x,y;
         while(!gameOver()){
-            board.printBoard();
-            // do{
-                System.out.println("Player 1, Enter x-coord");
-                x = in.nextInt();
-                System.out.println("Player 1, Enter y-coord");
-                y = in.nextInt();
-            // }while(board.isLegal(x, y, 1) != true);
-            board.place(y,x,1);
-            board.printBoard();
-            // do{
-                System.out.println("Player 2, Enter x-coord");
-                x = in.nextInt();
-                System.out.println("Player 2, Enter y-coord");
-                y = in.nextInt();
-            // } while(board.isLegal(x, y, 2) != true);
-            board.place(y,x,2);
+            if(!gameOver()){
+                board.printBoard();
+                // do{
+                    System.out.print("Player 1, Enter x-coord: ");
+                    x = in.nextInt();
+                    System.out.print("Player 1, Enter y-coord: ");
+                    y = in.nextInt();
+                    System.out.println();
+                // }while(board.isLegal(x, y, 1) != true);
+                board.place(y,x,1);
+                board.printBoard();
+            }
+            if(!gameOver()){
+                // do{
+                    System.out.print("Player 2, Enter x-coord: ");
+                    x = in.nextInt();
+                    System.out.print("Player 2, Enter y-coord: ");
+                    y = in.nextInt();
+                    System.out.println();
+                // } while(board.isLegal(x, y, 2) != true);
+                board.place(y,x,2);
+            }
         }
     }
 

@@ -15,7 +15,6 @@ public class OthelloBoard extends Board{
         }
         //checks if empty space
         if (board[i][j]!=0){
-            System.out.print("Error: That space is not empty");
             return canDo;
         }
         
