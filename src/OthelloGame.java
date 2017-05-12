@@ -1,6 +1,6 @@
 import java.util.*;
 public class OthelloGame implements Game{
-    private OthelloBoard board;
+    OthelloBoard board;
     private int currentPlayer;
     public OthelloGame(){
         board=new OthelloBoard();
@@ -29,7 +29,7 @@ public class OthelloGame implements Game{
                     y = in.nextInt();
                     System.out.println();
                 // }while(board.isLegal(x, y, 1) != true);
-                board.place(y,x,1);
+                board.place(x,y,1);
                 board.printBoard();
             }
             if(!gameOver()){
@@ -40,7 +40,7 @@ public class OthelloGame implements Game{
                     y = in.nextInt();
                     System.out.println();
                 // } while(board.isLegal(x, y, 2) != true);
-                board.place(y,x,2);
+                board.place(x,y,2);
             }
         }
         int winner=board.getScore1()>board.getScore2()?1:2;
