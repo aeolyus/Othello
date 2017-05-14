@@ -1,6 +1,12 @@
+/**
+ * Abstract class for a board
+ */
 public abstract class Board{
     protected int score1,score2;
     int[][] board;
+    /**
+     * Constructs a board
+     */
     public Board(int i){
         board=new int[i][i];
     }

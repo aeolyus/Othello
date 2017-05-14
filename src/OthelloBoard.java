@@ -5,7 +5,7 @@ public class OthelloBoard extends Board{
         board[3][4]=board[4][3]=1;
     }
     
-    public boolean isLegal(int i, int j, int player){
+    public boolean isLegal(int x, int y, int player){
         //boolean canDo = false;
         int otherPlayer=0;
         if (player == 1){
@@ -14,20 +14,24 @@ public class OthelloBoard extends Board{
             otherPlayer = 1;
         }
         //checks if empty space
-        if (board[i][j]!=0){
+        if (board[x][y]!=0){
             return false;
         }
         //checks  if inside board
-        if (!(i<board.length&&j<board[0].length&&i>=0&&j>=0)){
+        if (!(x<board.length&&y<board[0].length&&x>=0&&y>=0)){
             return false;
         }
         
         boolean adjacent=false; //is true if at least one piece of the opposite color is adjacent
-        for(int k=-1;k<=1;k++)
-            for(int m=-1;m<=1;m++)
-                if((i+k)>=0&&(i+k)<board.length&&(j+m)>=0&&(j+m)<board[0].length)
-                    if(board[i+k][j+m]==otherPlayer)
+        for(int i=-1;i<=1;i++){
+            for(int j=-1;j<=1;j++){
+                if((x+i)>=0&&(x+i)<board.length&&(y+j)>=0&&(y+j)<board[0].length){
+                    if(board[x+i][y+j]==otherPlayer){
                         adjacent=true;
+                    }
+                }
+            }
+        }
                         
         if(!adjacent)
             return false;
@@ -35,8 +39,9 @@ public class OthelloBoard extends Board{
         boolean flag=true; //
         //vertical down
         for(int i=1;x+i<board.length&&flag;i++){
-            if(board[x+i][y]==0)
+            if(board[x+i][y]==0){
                 flag=false;
+            }
             if(board[x+i][y]==player){
                 return true;
             }
@@ -44,190 +49,76 @@ public class OthelloBoard extends Board{
         flag=true;
         //horizontal right
         for(int j=1;y+j<board.length&&flag;j++){
-            if(board[x][y+j]==0)
+            if(board[x][y+j]==0){
                 flag=false;
+            }
             if(board[x][y+j]==player){
-                flag=false;
-                for(int k=y+j;k>y;k--)
-                    board[x][k]=player;
+                return true;
             }
         }
         flag=true;
         //vertical up
         for(int i=1;x-i>=0&&flag;i++){
-            if(board[x-i][y]==0)
+            if(board[x-i][y]==0){
                 flag=false;
+            }
             if(board[x-i][y]==player){
-                flag=false;
-                for(int j=x-i;j<x;j++)
-                    board[j][y]=player;
+                return true;
             }
         }
         flag=true;
         //horizontal left
         for(int j=1;y-j>=0&&flag;j++){
-            if(board[x][y-j]==0)
+            if(board[x][y-j]==0){
                 flag=false;
+            }
             if(board[x][y-j]==player){
-                flag=false;
-                for(int k=y-j;k<y;k++)
-                    board[x][k]=player;
+                return true;
             }
         }
         flag=true;
         //diagonal right-down
         for(int i=1;x+i<board[0].length&&y+i<board.length&&flag;i++){
-            if(board[x+i][y+i]==0)
+            if(board[x+i][y+i]==0){
                 flag=false;
+            }
             if(board[x+i][y+i]==player){
-                flag=false;
-                for(int j=i;j>0;j--)
-                    board[x+j][y+j]=player;
+                return true;
             }
         }
         flag=true;
         //diagonal down-left
         for(int i=1;x+i<board[0].length&&y-i>=0&&flag;i++){
-            if(board[x+i][y-i]==0)
+            if(board[x+i][y-i]==0){
                 flag=false;
+            }
             if(board[x+i][y-i]==player){
-                flag=false;
-                for(int j=i;j>0;j--)
-                    board[x+j][y-j]=player;
+                return true;
             }
         }
         flag=true;
         //diagonal up-right
         for(int i=1;x-i>=0&&y+i<board.length&&flag;i++){
-            if(board[x-i][y+i]==0)
+            if(board[x-i][y+i]==0){
                 flag=false;
+            }
             if(board[x-i][y+i]==player){
-                flag=false;
-                for(int j=i;j>0;j--)
-                    board[x-j][y+j]=player;
+                return true;
             }
         }
         flag=true;
         //diagonal left-up
         for(int i=1;x-i>=0&&y-i>=0&&flag;i++){
-            if(board[x-i][y-i]==0)
+            if(board[x-i][y-i]==0){
                 flag=false;
+            }
             if(board[x-i][y-i]==player){
-                flag=false;
-                for(int j=i;j>0;j--)
-                    board[x-j][y-j]=player;
+                return true;
             }
         }
-        /*int topLeft = board[i-1][j-1];
-        if (topLeft == otherPlayer){
-            int y = j-2;
-            for (int x = i-2; x >= 0 && y >= 0; x--){
-                if (board[x][y] == player){
-                    canDo = true;
-                    break;
-                }else if(board[x][y] == 0){
-                    break;
-                }else if(board[x][y] == otherPlayer){
-                    y--;
-                }
-            }
-        }
-        int topMid = board[i-1][j];
-            if (topMid == otherPlayer){
-                int y = i;
-                for (int x = i-2; x >= 0; x--){
-                    if (board[x][y] == player){
-                        canDo = true;
-                        break;
-                    }else if(board[x][y] == 0){
-                        break;
-                    }else if(board[x][y] == otherPlayer){
-                    }
-                }
-            }
-        int topRight = board[i-1][j+1];
-            if (topRight == otherPlayer){
-                int x = j-2;
-                for (int y = i+2; y < board[0].length && y < board.length; x++){
-                    if (board[x][y] == player){
-                        canDo = true;
-                        break;
-                    }else if(board[x][y] == 0){
-                        break;
-                    }else if(board[x][y] == otherPlayer){
-                        x--;
-                    }
-                }
-            }
-        int midLeft = board[i][j-1];
-            if (midLeft == otherPlayer){
-                int x = i;
-                for (int y = i-2; y >= 0; y--){
-                    if (board[x][y] == player){
-                        canDo = true;
-                        break;
-                    }else if(board[x][y] == 0){
-                        break;
-                    }else if(board[x][y] == otherPlayer){
-                    }
-                }
-            }
-        int midRight = board[i][j+1];
-            if (midRight == otherPlayer){
-                int x = i;
-                for (int y = i+2; y < board[0].length; y++){
-                    if (board[x][y] == player){
-                        canDo = true;
-                        break;
-                    }else if(board[x][y] == 0){
-                        break;
-                    }else if(board[x][y] == otherPlayer){
-                    }
-                }
-            }
-        int botLeft = board[i+1][j-1];
-            if (topLeft == otherPlayer){
-                int y = j-2;
-                for (int x = i+2; x < board.length && y >= 0; x++){
-                    if (board[x][y] == player){
-                        canDo = true;
-                        break;
-                    }else if(board[x][y] == 0){
-                        break;
-                    }else if(board[x][y] == otherPlayer){
-                        y--;
-                    }
-                }
-            }
-        int botMid = board[i+1][j];
-            if (botMid == otherPlayer){
-                int y = j;
-                for (int x = i+2; x < board.length; x++){
-                    if (board[x][y] == player){
-                        canDo = true;
-                        break;
-                    }else if(board[x][y] == 0){
-                        break;
-                    }else if(board[x][y] == otherPlayer){
-                    }
-                }
-            }
-        int botRight = board[i+1][j+1];
-            if (botRight == otherPlayer){
-                int y = j+2;
-                for (int x = i+2; x < board.length && y < board[0].length; x++){
-                    if (board[x][y] == player){
-                        canDo = true;
-                        break;
-                    }else if(board[x][y] == 0){
-                        break;
-                    }else if(board[x][y] == otherPlayer){
-                        y++;
-                    }
-                }
-            }
-        return canDo;*/
+        return false;
     }
+
     
     /**
      * Places a piece on the board (coordinates start at (0,0))
