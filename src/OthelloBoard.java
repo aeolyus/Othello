@@ -29,14 +29,15 @@ public class OthelloBoard extends Board{
         }else if (player == 2){
             otherPlayer = 1;
         }
+        
+        if (!onBoard(x,y)){
+            return false;
+        }
         //checks if empty space
         if (board[x][y]!=0){
             return false;
         }
         //checks if inside board
-        if (!onBoard(x,y)){
-            return false;
-        }
         
         boolean adjacent=false; //is true if at least one piece of the opposite color is adjacent
         for(int i=-1;i<=1;i++){
