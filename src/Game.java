@@ -13,6 +13,6 @@ public interface Game{
     /**
      * Plays the game
      */
-    public void play();
+    public void play(int player);
     // public void restart(); use with start
 }
